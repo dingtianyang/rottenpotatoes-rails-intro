@@ -26,6 +26,8 @@ class MoviesController < ApplicationController
   # end
   
   def index
+    session.clear
+    
     @sort = params[:sort]
     if(!params.has_key?(:sort) && !params.has_key?(:ratings))
       if(session.has_key?(:sort))
