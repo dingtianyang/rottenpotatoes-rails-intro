@@ -30,9 +30,9 @@ class MoviesController < ApplicationController
     sorted = params[:sort] || session[:sort]
     case sorted
     when 'title'
-      ordering, @title_header = {:title => :asc}, 'hilite'
+      @title_header = 'hilite'
     when 'release_date'
-      ordering, @date_header = {:release_date => :asc}, 'hilite'
+      @date_header = 'hilite'
     end
     
     @sort = params[:sort]
@@ -99,10 +99,5 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-  
-  def find_class(header)
-    params[:sort] == header ? 'hilite' : nil
-  end
-  helper_method :find_class
 
 end
