@@ -26,7 +26,14 @@ class MoviesController < ApplicationController
   # end
   
   def index
-    session.clear
+    # session.clear
+    sorted = params[:sort] || session[:sort]
+    case sorted
+    when 'title'
+      ordering, @title_header = {:title => :asc}, 'hilite'
+    when 'release_date'
+      ordering, @date_header = {:release_date => :asc}, 'hilite'
+    end
     
     @sort = params[:sort]
     if(!params.has_key?(:sort) && !params.has_key?(:ratings))
